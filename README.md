@@ -6,6 +6,14 @@ support searchInput that filter options,selectAllCheckBox that select all option
 ## Features
 Support for asynchronous search；
 
+## Demo
+```
+npm install
+node server.js
+listening at 3000
+http://localhost:3000
+```
+
 
 ## Install
 **Node**
