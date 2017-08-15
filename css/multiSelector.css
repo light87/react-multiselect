@@ -106,12 +106,12 @@
 }
 
 .open {
-    display: block!important;
+    display: block !important;
 }
 
 .rm-dropdown-menu {
     display: none;
-    position: fixed;
+    position: absolute;
     top: 100%;
     left: 0;
     z-index: 1000;
@@ -143,9 +143,16 @@
     margin: 2px 15px;
 }
 
-.rm-dropdown-menu .dropdown-operation {
+.rm-dropdown-menu .search-operation {
+    display: none;
 }
 
-.rm-dropdown-menu .dropdown-operation .search-operation,.rm-dropdown-menu .dropdown-operation .allCheck-operation {
+.rm-dropdown-menu .allCheck-operation {
     display: none;
+}
+
+.searcherValue{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

@@ -4,8 +4,6 @@ import React from "react";
 import {
   getAllNoChildrenNodes,
   findNode,
-  getPositionLeft,
-  getPositionTop
 } from "./common";
 import * as _ from "lodash";
 
@@ -34,13 +32,14 @@ export default class MultiSelect extends React.Component {
     const {initValue} = this.props;
     let initSelected = initValue || [];
     this.state = {
-      top: 0,
+      top: '100%',
       left: 0,
       selectedValue: initSelected,
       toggleDown: false,
       searchText: '',
       allChecked: false
     };
+    console.log('test');
     this.toggleUp = this.toggleUp.bind(this);
     this.toggleDown = this.toggleDown.bind(this);
     this.stopPropagation = this.stopPropagation.bind(this);
@@ -60,15 +59,8 @@ export default class MultiSelect extends React.Component {
 
   toggleDown = (event) => {
     const {toggleDown} = this.state;
-    let top = getPositionTop(event.currentTarget);
-    event.currentTarget.offsetHeight && ( top += event.currentTarget.offsetHeight);
-    let left = getPositionLeft(event.currentTarget);
-    let clientWidth = document.body.clientWidth;
-    if (left > clientWidth / 2) {
-      left = clientWidth - left;
-    }
     this.stopPropagation(event);
-    this.setState({toggleDown: !toggleDown, top, left});
+    this.setState({toggleDown: !toggleDown});
   };
 
   toggleUp = () => {
@@ -227,12 +219,12 @@ export default class MultiSelect extends React.Component {
   getShowLabelText = () => {
     const {buttonText, showTextNumber, dataSource, dataSourceConfig} = this.props;
     const {selectedValue, allChecked} = this.state;
-    let labelText = buttonText || '选项';
+    let labelText = buttonText || 'option';
     let showNumber = showTextNumber || 1;
     if (allChecked) {
-      labelText += ' 已全选';
+      labelText += ' selectedAll';
     } else if (showNumber && selectedValue.length > 0 && selectedValue.length > showNumber) {
-      labelText += ` ${selectedValue.length}个`;
+      labelText += ` ${selectedValue.length}`;
     } else if (showNumber && selectedValue.length > 0 && selectedValue.length <= showNumber) {
       const {label, text} = dataSourceConfig;
       let allOptionNodes = getAllNoChildrenNodes(dataSource);
@@ -252,6 +244,9 @@ export default class MultiSelect extends React.Component {
   render() {
     const {hasSelectAll, hasSearch} = this.props;
     const {toggleDown, selectedValue, top, left, searchText, allChecked} = this.state;
+    console.log('multi',this.props);
+    console.log('multi',selectedValue);
+
     return (
       <div className="criteria-extended">
         <div className="criteria-list">
@@ -293,7 +288,7 @@ export default class MultiSelect extends React.Component {
                        onChange={this.onChangeAllOption}
                 />
                 <label
-                  htmlFor={`allCheckBox`}>全选</label>
+                  htmlFor={`allCheckBox`}>selectAll</label>
               </div>
             </div>
             <ul className="dropdown-operation">

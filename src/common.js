@@ -59,33 +59,3 @@ export function findNode(nodes, nodeValue, objProperty) {
   })(nodes, nodeValue);
   return result;
 }
-
-export function getPositionTop(divElement) {
-  let actualTop = 0;
-  if (divElement) {
-    actualTop = divElement.offsetTop || 0;
-    divElement.paddingTop && (actualTop -= divElement.paddingTop);
-    let current = divElement.offsetParent;
-    while (current !== null && current !== undefined) {
-      current.offsetTop && (actualTop += current.offsetTop);
-      current.paddingTop && (actualTop -= current.paddingTop);
-      current = current.offsetParent;
-    }
-  }
-  return actualTop;
-}
-
-export function getPositionLeft(divElement) {
-  let actualLeft = 0;
-  if (divElement) {
-    actualLeft = divElement.offsetLeft || 0;
-    divElement.paddingLeft && (actualLeft -= divElement.paddingLeft);
-    let current = divElement.offsetParent;
-    while (current !== null && current !== undefined) {
-      current.offsetLeft && (actualLeft += current.offsetLeft);
-      current.paddingLeft && (actualLeft -= current.paddingLeft);
-      current = current.offsetParent;
-    }
-  }
-  return actualLeft;
-}
